@@ -1,5 +1,5 @@
 #import ("Trie.dart");
-#import ("ModifiedSimpleTrie.dart");
+#import ("SimpleTrie.dart");
 #import('dart:io');
 
 int LIMIT = 50000;

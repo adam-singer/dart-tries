@@ -1,4 +1,3 @@
-#library("TrieTest.dart");
 #import ("Trie.dart");
 #import ("SimpleTrie.dart");
 
