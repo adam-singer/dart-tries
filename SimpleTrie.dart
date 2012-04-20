@@ -1,3 +1,4 @@
+#library ("trie");
 #import ("Trie.dart");
 
 class SimpleTrie<T> implements Trie<T>{

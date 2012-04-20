@@ -1,3 +1,4 @@
+#library ("trie");
 
 /*
 * A simple generic Trie interface. Trie uses Strings as keys.
