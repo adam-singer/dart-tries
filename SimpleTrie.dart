@@ -62,6 +62,9 @@ class SimpleTrie<T> implements Trie<T>{
   }
 
   _SimpleTrieNode<T> _walkToNode(String pre) {
+    if (pre === null) {
+      return _root;
+    }
     _SimpleTrieNode<T> node = _root;
     int i = 0;
     while(i < pre.length && node!= null) {
@@ -105,6 +108,15 @@ class SimpleTrie<T> implements Trie<T>{
       keys.add(key);
     });
     return keys;
+  }
+
+  Map<String, T> getKeyValuesWithPrefix(String pre) {
+    LinkedHashMap<String, T> res = new LinkedHashMap<String, T>();
+    _SimpleTrieNode node = _walkToNode(pre);
+    _walkAndApply(node, void _(String key, T value) {
+      res[key] = value;
+    });
+    return res;
   }
 
   void calculateMetrics() {

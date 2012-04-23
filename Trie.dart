@@ -20,6 +20,8 @@ interface Trie<T> {
    * Collection is lexicographically ordered by keys.
    * For obejcts {"foo":o1, "foobar":o2, "blah":o3} in trie,
    * returns (o1,o2) for [pre] = "foo".
+   *
+   * If prefix is null or empty string it returns all values.
    */
   Collection<T> getValuesWithPrefix(String pre);
 
@@ -30,6 +32,12 @@ interface Trie<T> {
    * returns ("foo","foobar") for [pre] = "foo".
    */
   Collection<String> getKeysWithPrefix(String pre);
+
+  /**
+   * Returns a map of key-value pairs with given [prefix]
+   * map is sorted lexicographically.
+   */
+  Map<String, T> getKeyValuesWithPrefix(String prefix);
 
   void forEach(void f(String key, T value));
 

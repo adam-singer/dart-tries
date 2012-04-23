@@ -9,6 +9,8 @@ class TrieTest {
     testGetKeysByPrefix(new SimpleTrie());
     testGetKeysByPrefixComplex(new SimpleTrie());
     testGetValuesByPrefix(new SimpleTrie());
+    testGetKeyValuesByPrefix(new SimpleTrie());
+    testGetKeysByNullOrEmptyPrefix(new SimpleTrie());
   }
 
   static void test(Trie trie) {
@@ -76,9 +78,20 @@ class TrieTest {
     trie["Hello"] = "Hello-Value";
     trie["Hell"] = "Hell-Value";
     List<String> keys = new List.from(trie.getKeysWithPrefix("H"));
-    Expect.equals(2, keys.length);
     List<String> expected = ["Hell", "Hello"];
     Expect.listEquals(expected, keys);
+  }
+
+  static void testGetKeysByNullOrEmptyPrefix(Trie trie) {
+    Expect.isTrue(trie.isEmpty());
+    trie["Hello"] = "Hello-Value";
+    trie["Happy"] = "Happy-Value";
+    trie["Apple"] = "Apple-Value";
+    List<String> keysFromEmpty = new List.from(trie.getKeysWithPrefix(""));
+    List<String> keysFromNull = new List.from(trie.getKeysWithPrefix(null));
+    List<String> expected = ["Apple", "Happy", "Hello"];
+    Expect.listEquals(expected, keysFromNull);
+    Expect.listEquals(expected, keysFromEmpty);
   }
 
   static void testGetKeysByPrefixComplex(Trie trie) {
@@ -105,6 +118,20 @@ class TrieTest {
     Expect.equals(2, values.length);
     List<String> expected = ["Hell-Value", "Hello-Value"];
     Expect.listEquals(expected, values);
+  }
+
+  static void testGetKeyValuesByPrefix(Trie trie) {
+    Expect.isTrue(trie.isEmpty());
+    trie["Hello"] = "Hello-Value";
+    trie["Hel"] = "Hel-Value";
+    trie["Happy"] = "Happy-Value";
+    Map <String, String> actual = trie.getKeyValuesWithPrefix("H");
+    Expect.equals(3, actual.length);
+    // We expect results must be sorted by keys.
+    LinkedHashMap<String, String> expected = {"Happy" : "Happy-Value",
+                                              "Hel" : "Hel-Value",
+                                              "Hello" : "Hello-Value", };
+    Expect.mapEquals(expected, actual);
   }
 
 }
